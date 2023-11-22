@@ -4,11 +4,14 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 type state = {
-      userData : Models.Session | object
+      userData : Models.Session | object,
+      userSession : Models.User<Models.Preferences> | object
 }
 
 type Action = {
-      updateUserData : (data : Models.Session) => void
+      updateUserData : (data : Models.Session) => void,
+      updateUserSession : (data : Models.User<Models.Preferences> | object) => void,
+      userReset : () => void
 }
 
 export const useData = create<state & Action>()(
@@ -16,8 +19,17 @@ export const useData = create<state & Action>()(
            persist(
                (set) => ({
                      userData : {},
+                     userSession : {},
+
                      updateUserData : (data : Models.Session) => 
-                     set(() => ({userData : data}))
+                     set(() => ({userData : data})),
+
+                     updateUserSession : (data : Models.User<Models.Preferences> |object) =>
+                     set(() => ({userSession : data})),
+
+                     userReset : () => 
+                     set(() => ({userData : {}, userSession : {}}))
+
                })
 
            ,{name : 'users'})

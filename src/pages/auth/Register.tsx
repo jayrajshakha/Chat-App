@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 const Register = () => {
   const nevigate = useNavigate();
+
   const [authState, setAuthState] = useState({
     name: "",
     email: "",

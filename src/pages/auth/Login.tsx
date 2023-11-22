@@ -6,37 +6,36 @@ import { AppwriteException } from "appwrite";
 import { toast } from "react-toastify";
 import { useData } from "../../data/UsersData";
 
-
 const Login = () => {
+  const userState = useData();
+  const navigate = useNavigate();
 
-  const userState = useData()
-  const navigate = useNavigate()
-  
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const [authState, setAuthState] = useState({
     email: "",
     password: "",
   });
 
-
-
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true)
-   
-    const promise = account.createEmailSession( authState.email , authState.password)
+    setLoading(true);
 
-    promise.then((res) => {
-      setLoading(false)
-      userState.updateUserData(res)
-      toast.success('Loagin succesfuly ' , {theme : "colored"})
-      navigate("/")
-       
-    }).catch((error : AppwriteException) => {
-         setLoading(false)
-         toast.error(error.message , {theme : "colored"})
-    })
-   
+    const promise = account.createEmailSession(
+      authState.email,
+      authState.password
+    );
+
+    promise
+      .then((res) => {
+        setLoading(false);
+        userState.updateUserData(res);
+        toast.success("Login succesfuly ", { theme: "colored" });
+        navigate("/");
+      })
+      .catch((error: AppwriteException) => {
+        setLoading(false);
+        toast.error(error.message, { theme: "colored" } );
+      });
   };
 
   return (
@@ -71,19 +70,23 @@ const Login = () => {
             />
           </div>
           <div className="m-5">
-            <Button disabled={loading} className="bg-[#65b9f5] text-black w-full" type="submit">
-            {loading ? "Processing..." : "Submit"}            </Button>
+            <Button
+              disabled={loading}
+              className="bg-[#65b9f5] text-black w-full"
+              type="submit"
+            >
+              {loading ? "Processing..." : "Submit"}{" "}
+            </Button>
           </div>
           <div className="w-full m-5">
-          <Link to={"/register"}>
-            {" "}
-            <h1 className="text-black font-semibold my-auto text-center ">
-                 Sign up for <span className="text-[#65b9f5]">Chat App</span>
-            </h1>
-          </Link>
-        </div>
+            <Link to={"/register"}>
+              {" "}
+              <h1 className="text-black font-semibold my-auto text-center ">
+                Sign up for <span className="text-[#65b9f5]">Chat App</span>
+              </h1>
+            </Link>
+          </div>
         </form>
-        
       </div>
     </div>
   );
