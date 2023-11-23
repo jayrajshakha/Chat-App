@@ -4,6 +4,7 @@ import { account } from "./config/AppwriteConfig";
 import { useData } from "./data/UsersData";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import AppNavbar from "./components/AppNavbar";
 
 const App = () => {
 
@@ -16,14 +17,14 @@ const App = () => {
           account.get()
           .then((res) => {
             logedUser.updateUserSession(res)
-            console.log(res);
+    
              
           })
-          .catch((err) => {
+          .catch(() => {
             toast.dismiss('Your session got expired ! please login again')
             logedUser.userReset()
             navigate('/login')
-            console.log(err)
+   
              
           })
       }
@@ -33,9 +34,7 @@ const App = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Jay Rajshakha </h1>
-      <Button color="success"> hello </Button>
-      
+       <AppNavbar />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import App from '../App'
 import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
+import Signout from '../components/Logout'
 
 export const routes = createBrowserRouter(
       [
@@ -18,6 +19,10 @@ export const routes = createBrowserRouter(
         {
           path : 'register',
           Component : Register,
+        },
+        {
+          path : '/signout',
+          Component : Signout,
         }
     
         
