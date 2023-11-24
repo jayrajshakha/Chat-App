@@ -13,9 +13,9 @@ export default function Logout() {
 
   const cancelButtonRef = useRef(null);
 
-  const sessionId = useData((state) => state.userSession) as Models.Session;
+  const sessionId = useData((state) => state.userData) as Models.Session;
   // console.log(sessionId.$id);
-  
+
   const out = () => {
     account
       .deleteSession(sessionId.$id)

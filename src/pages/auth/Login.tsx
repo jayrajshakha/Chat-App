@@ -34,7 +34,7 @@ const Login = () => {
       })
       .catch((error: AppwriteException) => {
         setLoading(false);
-        toast.error(error.message, { theme: "colored" } );
+        toast.error(error.message, { theme: "colored" });
       });
   };
 

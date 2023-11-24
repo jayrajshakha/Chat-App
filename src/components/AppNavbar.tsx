@@ -1,18 +1,17 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { SearchIcon } from "./SearchIcon";
+import { Input } from "@nextui-org/react";
+import CreateCommunity from "./CreateComunity";
 
-function classNames(...classes : unknown[]) {
+function classNames(...classes: unknown[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function AppNavbar() {
-
-
-  
-
-  return (  
+  return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
@@ -41,27 +40,34 @@ export default function AppNavbar() {
                     Snapgram
                   </p>
                 </div>
-                <div className="hidden sm:flex items-center  ">
+                {/* <div className="hidden sm:flex items-center  ">
                   <div className="flex ">
                     <a
                       href={"#"}
                       className="text-gray-300 hover:bg-gray-700 hover:text-white"
                       aria-current="page"
                     >
-                      community
+                      <CreateCommunity />
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className=" hidden sm:inline-block relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <div className="hidden sm:inline-block">
+                  <Input
+                    classNames={{
+                      base: "max-w-full sm:max-w-[13rem] h-10 ",
+                      mainWrapper: "h-full",
+                      input: "text-small",
+                      inputWrapper:
+                        "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                    }}
+                    placeholder="Search communities"
+                    size="sm"
+                    startContent={<SearchIcon size={18} />}
+                    type="search"
+                  />
+                </div>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
@@ -140,11 +146,19 @@ export default function AppNavbar() {
                 className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                 aria-current={"page"}
               >
-                community
+                Your Profile
+              </Disclosure.Button>
+
+              <Disclosure.Button
+                as="a"
+                href={"#"}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                aria-current={"page"}
+              >
+                Settings
               </Disclosure.Button>
             </div>
           </Disclosure.Panel>
-        
         </>
       )}
     </Disclosure>

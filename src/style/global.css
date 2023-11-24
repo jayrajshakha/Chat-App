@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .sideheight {
+    height: -webkit-calc(100vh - 64px);
+    width: 100vw;
+  }
+}
