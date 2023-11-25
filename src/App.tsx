@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import AppNavbar from "./components/AppNavbar";
 import CreateCommunity from "./components/CreateComunity";
+import CommunityList from "./components/CommunityList";
 
 const App = () => {
   const isRendered = useRef<boolean>(false);
@@ -34,6 +35,9 @@ const App = () => {
       <div className="flex sideheight">
         <div className="flex bg-slate-400 justify-start items-center p-2 flex-col w-[25%] sm:w-[16%]">
           <CreateCommunity />
+        </div>
+        <div className="flex h-full justify-center items-center w-full ">
+              <CommunityList />
         </div>
       </div>
     </div>

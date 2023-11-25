@@ -8,6 +8,7 @@ type state = {
 
 type Action = {
   AddCommunity: (data: Models.Document) => void;
+  AddCommunities : (data : Array<Models.Document>) => void
 };
 
 export const CommunityStore = create<state & Action>()(
@@ -16,6 +17,10 @@ export const CommunityStore = create<state & Action>()(
     AddCommunity: (data: Models.Document) =>
       set((state) => ({
         community: [data, ...state.community],
+      })),
+      AddCommunities : (data : Array<Models.Document>) => 
+      set(() => ({
+         community : data
       })),
   }))
 );
