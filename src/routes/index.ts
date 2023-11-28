@@ -5,6 +5,7 @@ import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import Signout from "../components/Logout";
 import CreateCommunity from "../components/CreateComunity";
+import Chat from "../pages/Chat";
 
 export const routes = createBrowserRouter([
   {
@@ -28,4 +29,8 @@ export const routes = createBrowserRouter([
     path: "/community",
     Component: CreateCommunity,
   },
+  {
+     path : "/communityChat/:id",
+     Component : Chat,
+  }
 ]);

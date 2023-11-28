@@ -2,6 +2,8 @@ import { AppwriteException, Query } from "appwrite";
 import { useEffect, useRef, useState } from "react";
 import { COLLECTION_ID, DATABASE, DATABASE_ID } from "../config/AppwriteConfig";
 import { CommunityStore } from "../data/CommunityData";
+import { Link } from "react-router-dom";
+import CreateCommunity from "./CreateComunity";
 
 const CommunityList = () => {
 
@@ -17,9 +19,7 @@ const CommunityList = () => {
       DATABASE.listDocuments(DATABASE_ID, COLLECTION_ID, [
          Query.select(['$id', 'name'])
       ]).then((res) => {
-          setLoading(false)
-          console.log(res);
-          
+          setLoading(false) 
           StoreData.AddCommunities(res.documents)
 
       }).catch((err : AppwriteException) => {
@@ -42,18 +42,21 @@ const CommunityList = () => {
         one.
       </p>
       <ul className="my-4 space-y-3">
+        {
+          StoreData.community.length < 0 ? (<li> No communities are available plase create new community </li>) : '' 
+        }
          {
             StoreData.community.length > 0 && StoreData.community.map((item) => {
                 return (
                   <li 
                   key={item.$id}
                   className= ''>
-                  <a
-                    href="#"
+                  <Link
+                    to={`/communityChat/${item.$id}`}
                     className="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
                   >
                     <span className="flex-1 ms-3 whitespace-nowrap"> {item.name}</span>
-                  </a>
+                  </Link>
                 </li>
                 )
             })
